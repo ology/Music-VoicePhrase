@@ -1,5 +1,7 @@
 Revision history for Music-VoicePhrase
 
 {{$NEXT}}
+
+0.0100 2026-06-22 12:54:29
   - Port logic from https://github.com/ology/Music/blob/master/tones-together.pl
   - Mint with Dist::Zilla.
