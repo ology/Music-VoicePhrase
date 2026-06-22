@@ -4,6 +4,7 @@ package Music::VoicePhrase;
 
 our $VERSION = '0.0100';
 
+use v5.36;
 use Moo;
 use strictures 2;
 use Carp qw(croak);
@@ -36,7 +37,7 @@ Default: C<C>
 
 has base => (
     is      => 'ro',
-    isa     => sub { croak "$_[0] is not a valid note" unless $_[0] =~ /^[A-G][#b]$/i },
+    isa     => sub { croak "$_[0] is not a valid note" unless $_[0] =~ /^[A-G][#b]?$/i },
     default => sub { 'C' },
 );
 
@@ -89,11 +90,11 @@ has pitches => (
 );
 
 sub _build_pitches ($self) {
-  my @pitches = (
-    get_scale_MIDI($self->base, $self->octave, $self->scale),
-    get_scale_MIDI($self->base, $self->octave + 1, $self->scale),
-  );
-  return \@pitches;
+    my @pitches = (
+        get_scale_MIDI($self->base, $self->octave, $self->scale),
+        get_scale_MIDI($self->base, $self->octave + 1, $self->scale),
+    );
+    return \@pitches;
 }
 
 =head2 intervals
