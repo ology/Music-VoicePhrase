@@ -22,6 +22,7 @@ subtest defaults => sub {
     isa_ok $obj->_rhythm, 'Music::Duration::Partition';
     is $obj->motif_num, 4, 'motif_num';
     is scalar $obj->motifs->@*, 4, 'motifs';
+    is scalar $obj->voices->@*, 4, 'voices';
     is $obj->verbose, 0, 'verbose';
 };
 

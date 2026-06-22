@@ -2,7 +2,7 @@ package Music::VoicePhrase;
 
 # ABSTRACT: Construct a measured phrase of notes
 
-our $VERSION = '0.0104';
+our $VERSION = '0.0105';
 
 use v5.36;
 use Moo;
@@ -16,22 +16,15 @@ use namespace::clean;
 =head1 SYNOPSIS
 
   use Music::VoicePhrase ();
+
   my $mvp = Music::VoicePhrase->new;
 
-  # TODO add handy examples! But until then:
-  # > perl -Ilib -MData::Dumper::Compact=ddc -MMusic::VoicePhrase -E'$x=Music::VoicePhrase->new; say ddc $x'
-  # bless( {
-  #   base => 'C',
-  #   groups => [ 0, 0, 0 ],
-  #   intervals => [ -3, -2, -1, 1, 2, 3 ],
-  #   motif_num => 4,
-  #   octave => 0,
-  #   pool => [ 'dhn', 'hn', 'qn' ],
-  #   scale => 'major',
-  #   size => 4,
-  #   verbose => 0,
-  #   weights => [ 1, 2, 2 ],
-  # }, "Music::VoicePhrase" )
+  my $motifs = $mvp->motifs;
+  my $voices = $mvp->voices;
+
+  $mvp->motif_num(6);
+  my $motifs = $mvp->build_motifs;
+  my $voices = $mvp->build_voices;
 
 =head1 DESCRIPTION
 
@@ -249,13 +242,24 @@ Default: C<4> motifs
 has motifs => (
     is      => 'rw',
     lazy    => 1,
-    builder => '_build_motifs',
+    builder => 'build_motifs',
 );
 
-sub _build_motifs ($self) {
-    my @motifs = $self->_rhythm->motifs($self->motif_num);
-    return \@motifs;
-}
+=head2 voices
+
+  $voices = $mvp->voices;
+
+The pitches given by L<Music::VoiceGen>.
+
+Default: C<4> voices
+
+=cut
+
+has voices => (
+    is      => 'rw',
+    lazy    => 1,
+    builder => 'build_voices',
+);
 
 =head2 verbose
 
@@ -293,9 +297,27 @@ sub BUILD ($self, $args) {
 
   $motifs = $mvp->build_motifs;
 
-Build a list of motifs given the B<motif_num>.
+Build a fresh list of motifs based on the .
 
 =cut
+
+sub build_motifs ($self) {
+    my @motifs = $self->_rhythm->motifs($self->motif_num);
+    return \@motifs;
+}
+
+=head2 build_voices
+
+  $voices = $mvp->build_voices;
+
+Build a fresh list of voices based on the number of motifs.
+
+=cut
+
+sub build_voices ($self) {
+    my @voices = map { $self->_voice->rand } $self->motifs->@*;
+    return \@voices;
+}
 
 1;
 __END__
