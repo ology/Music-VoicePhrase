@@ -2,7 +2,7 @@ package Music::VoicePhrase;
 
 # ABSTRACT: Construct a phrase of rhythmic voices
 
-our $VERSION = '0.0100';
+our $VERSION = '0.0101';
 
 use v5.36;
 use Data::Dumper::Compact qw(ddc);
@@ -22,7 +22,8 @@ use namespace::clean;
 
 =head1 DESCRIPTION
 
-A C<Music::VoicePhrase> constructs a phrase of rhythmic voices.
+A C<Music::VoicePhrase> constructs a measured phrase of voices with
+both pitch and rhythmic value.
 
 =head1 ATTRIBUTES
 
