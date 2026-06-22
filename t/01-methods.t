@@ -6,10 +6,9 @@ use Test::More;
 
 use_ok 'Music::VoicePhrase';
 
-my $obj = new_ok 'Music::VoicePhrase' => [
-    verbose => 1,
-];
-
-is $obj->verbose, 1, 'verbose';
+subtest defaults => sub {
+    my $obj = new_ok 'Music::VoicePhrase';
+    is $obj->verbose, 0, 'verbose';
+}
 
 done_testing();
