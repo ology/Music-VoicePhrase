@@ -5,6 +5,7 @@ package Music::VoicePhrase;
 our $VERSION = '0.0100';
 
 use v5.36;
+use Data::Dumper::Compact qw(ddc);
 use Moo;
 use strictures 2;
 use Carp qw(croak);
@@ -227,8 +228,6 @@ has motif_num => (
 
 The rhythmic motifs given by L<Music::Duration::Partition>.
 
-This is a computed attribute from the C<build_motifs()> method.
-
 Default: C<4> motifs
 
 =cut
@@ -240,9 +239,8 @@ has motifs => (
 );
 
 sub _build_motifs ($self) {
-    my $motifs = $self->_rhythm->motifs($self->motif_num);
-    $self->motifs($motifs);
-    return $motifs;
+    my @motifs = $self->_rhythm->motifs($self->motif_num);
+    return \@motifs;
 }
 
 =head2 verbose
@@ -274,7 +272,7 @@ Create a new C<Music::VoicePhrase> object.
 =cut
 
 sub BUILD ($self, $args) {
-    $self->build_motifs;
+    # $self->_build_motifs;
 }
 
 =head2 build_motifs
@@ -284,12 +282,6 @@ sub BUILD ($self, $args) {
 Build a list of motifs given the B<motif_num>.
 
 =cut
-
-sub build_motifs ($self) {
-    my $motifs = $self->_rhythm->motifs($self->motif_num);
-    $self->motifs($motifs);
-    return $motifs;
-}
 
 1;
 __END__

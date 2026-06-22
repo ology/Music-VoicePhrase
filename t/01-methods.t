@@ -21,8 +21,7 @@ subtest defaults => sub {
     is_deeply $obj->groups, [0,0,0], 'groups';
     isa_ok $obj->_rhythm, 'Music::Duration::Partition';
     is $obj->motif_num, 4, 'motif_num';
-    print ddc $obj->motifs;
-    # is scalar $obj->motifs->@*, 4, 'motifs';
+    is scalar $obj->motifs->@*, 4, 'motifs';
     is $obj->verbose, 0, 'verbose';
 };
 
