@@ -19,10 +19,10 @@ use namespace::clean;
 
   my $mvp = Music::VoicePhrase->new;
 
-  my $motifs = $mvp->motifs;
+  my $motifs = $mvp->motifs; # using defaults
   my $voices = $mvp->voices;
 
-  $mvp->motif_num(6);
+  $mvp->motif_num(6); # get fresh
   $motifs = $mvp->build_motifs;
   $voices = $mvp->build_voices;
 
