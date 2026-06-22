@@ -6,8 +6,6 @@ use Test::More;
 
 use_ok 'Music::VoicePhrase';
 
-new_ok 'Music::VoicePhrase';
-
 my $obj = new_ok 'Music::VoicePhrase' => [
     verbose => 1,
 ];
