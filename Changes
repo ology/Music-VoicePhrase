@@ -1,6 +1,8 @@
 Revision history for Music-VoicePhrase
 
 {{$NEXT}}
+
+0.0106 2026-06-22 15:21:03
     - Fix the mixed-up Changes formatting.
     - Add handy attributes to operate in real-time.
 
