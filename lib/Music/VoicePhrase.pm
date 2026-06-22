@@ -1,8 +1,8 @@
 package Music::VoicePhrase;
 
-# ABSTRACT: Construct a phrase of rhythmic voices
+# ABSTRACT: Construct a measured phrase of notes
 
-our $VERSION = '0.0102';
+our $VERSION = '0.0103';
 
 use v5.36;
 use Moo;
