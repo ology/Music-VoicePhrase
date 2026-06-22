@@ -2,10 +2,9 @@ package Music::VoicePhrase;
 
 # ABSTRACT: Construct a phrase of rhythmic voices
 
-our $VERSION = '0.0101';
+our $VERSION = '0.0102';
 
 use v5.36;
-use Data::Dumper::Compact qw(ddc);
 use Moo;
 use strictures 2;
 use Carp qw(croak);
