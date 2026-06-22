@@ -19,20 +19,19 @@ use namespace::clean;
   my $mvp = Music::VoicePhrase->new;
 
   # TODO add handy examples! But until then:
-
-  > perl -Ilib -MData::Dumper::Compact=ddc -MMusic::VoicePhrase -E'$x=Music::VoicePhrase->new; say ddc $x'
-  bless( {
-    base => 'C',
-    groups => [ 0, 0, 0 ],
-    intervals => [ -3, -2, -1, 1, 2, 3 ],
-    motif_num => 4,
-    octave => 0,
-    pool => [ 'dhn', 'hn', 'qn' ],
-    scale => 'major',
-    size => 4,
-    verbose => 0,
-    weights => [ 1, 2, 2 ],
-  }, "Music::VoicePhrase" )
+  # > perl -Ilib -MData::Dumper::Compact=ddc -MMusic::VoicePhrase -E'$x=Music::VoicePhrase->new; say ddc $x'
+  # bless( {
+  #   base => 'C',
+  #   groups => [ 0, 0, 0 ],
+  #   intervals => [ -3, -2, -1, 1, 2, 3 ],
+  #   motif_num => 4,
+  #   octave => 0,
+  #   pool => [ 'dhn', 'hn', 'qn' ],
+  #   scale => 'major',
+  #   size => 4,
+  #   verbose => 0,
+  #   weights => [ 1, 2, 2 ],
+  # }, "Music::VoicePhrase" )
 
 =head1 DESCRIPTION
 
