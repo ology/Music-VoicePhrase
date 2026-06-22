@@ -16,6 +16,8 @@ subtest defaults => sub {
     isa_ok $obj->_voice, 'Music::VoiceGen';
     is $obj->size, 4, 'size';
     is_deeply $obj->pool, [qw(dhn hn qn)], 'pool';
+    is_deeply $obj->weights, [1,2,2], 'weights';
+    is_deeply $obj->groups, [0,0,0], 'groups';
     is $obj->verbose, 0, 'verbose';
 };
 
