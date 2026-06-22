@@ -2,7 +2,7 @@ package Music::VoicePhrase;
 
 # ABSTRACT: Construct a measured phrase of notes
 
-our $VERSION = '0.0105';
+our $VERSION = '0.0106';
 
 use v5.36;
 use Moo;
@@ -383,6 +383,19 @@ Build a fresh list of voices based on the number of motifs.
 sub build_voices ($self) {
     my @voices = map { $self->_voice->rand } $self->motifs->@*;
     return \@voices;
+}
+
+=head2 increment_index
+
+  $i = $mvp->increment_index;
+
+Just add one to the B<index> attribute.
+
+=cut
+
+sub increment_index ($self) {
+    $self->index($self->index + 1);
+    return $self->index;
 }
 
 1;
