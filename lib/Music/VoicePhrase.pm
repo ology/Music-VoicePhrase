@@ -31,6 +31,10 @@ use namespace::clean;
 A C<Music::VoicePhrase> constructs a measured phrase of voices with
 both pitch and rhythmic value.
 
+This module is also equipped with a few handy attributes to make
+real-time processing work. See the linked script in the
+L</"SEE ALSO"> section.
+
 =head1 ATTRIBUTES
 
 =head2 base
@@ -261,6 +265,68 @@ has voices => (
     builder => 'build_voices',
 );
 
+=head2 queue
+
+  $queue = $mvp->queue;
+
+Computed attribute for the priority queue used in real-time processing.
+
+=cut
+
+has queue => (
+    is      => 'rw',
+    isa     => sub { croak "$_[0] is not an array-ref" unless ref $_[0] eq 'ARRAY' },
+    default => sub { [] },
+);
+
+=head2 index
+
+  $index = $mvp->index;
+  $mvp->index($n);
+
+Computed attribute for the queue index that is used in real-time processing.
+
+Default: C<0>
+
+=cut
+
+has index => (
+    is      => 'rw',
+    isa     => sub { croak "$_[0] is not an integer" unless $_[0] =~ /^\d+$/ },
+    default => sub { 0 },
+);
+
+=head2 note
+
+  $note = $mvp->note;
+  $mvp->note($n);
+
+Computed attribute for the currently selected note that is used in real-time processing.
+
+Default: C<{}>
+
+=cut
+
+has note => (
+    is      => 'rw',
+    isa     => sub { croak "$_[0] is not a valid note" unless ref $_[0] eq 'HASH' },
+    default => sub { +{} },
+);
+
+=head2 onsets
+
+  $onsets = $mvp->onsets;
+
+Computed attribute for the note onsets used in real-time processing.
+
+=cut
+
+has onsets => (
+    is      => 'rw',
+    isa     => sub { croak "$_[0] is not an array-ref" unless ref $_[0] eq 'ARRAY' },
+    default => sub { [] },
+);
+
 =head2 verbose
 
   $verbose = $mvp->verbose;
@@ -331,5 +397,7 @@ L<Music::Duration::Partition>
 L<Music::Scales>
 
 L<Music::VoiceGen>
+
+L<https://github.com/ology/Music/blob/master/tones-together.pl>
 
 =cut
