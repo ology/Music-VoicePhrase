@@ -23,8 +23,8 @@ use namespace::clean;
   my $voices = $mvp->voices;
 
   $mvp->motif_num(6);
-  my $motifs = $mvp->build_motifs;
-  my $voices = $mvp->build_voices;
+  $motifs = $mvp->build_motifs;
+  $voices = $mvp->build_voices;
 
 =head1 DESCRIPTION
 
