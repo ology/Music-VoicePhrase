@@ -3,6 +3,7 @@ use strict;
 use warnings;
 
 use Test::More;
+use Data::Dumper::Compact qw(ddc);
 
 use_ok 'Music::VoicePhrase';
 
@@ -18,6 +19,10 @@ subtest defaults => sub {
     is_deeply $obj->pool, [qw(dhn hn qn)], 'pool';
     is_deeply $obj->weights, [1,2,2], 'weights';
     is_deeply $obj->groups, [0,0,0], 'groups';
+    isa_ok $obj->_rhythm, 'Music::Duration::Partition';
+    is $obj->motif_num, 4, 'motif_num';
+    print ddc $obj->motifs;
+    # is scalar $obj->motifs->@*, 4, 'motifs';
     is $obj->verbose, 0, 'verbose';
 };
 

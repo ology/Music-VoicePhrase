@@ -205,23 +205,6 @@ sub _build__rhythm ($self) {
   );
 }
 
-=head2 motifs
-
-  $motifs = $mvp->motifs;
-
-The rhythmic motifs given by L<Music::Duration::Partition>.
-
-This is a computed attribute from the C<build_motifs()> method.
-
-Default: C<4> motifs
-
-=cut
-
-has motifs => (
-    is       => 'rw',
-    init_arg => undef
-);
-
 =head2 motif_num
 
   $motif_num = $mvp->motif_num;
@@ -237,6 +220,30 @@ has motif_num => (
     isa     => sub { croak "$_[0] is not an integer" unless $_[0] =~ /^\d+$/ },
     default => sub { 4 },
 );
+
+=head2 motifs
+
+  $motifs = $mvp->motifs;
+
+The rhythmic motifs given by L<Music::Duration::Partition>.
+
+This is a computed attribute from the C<build_motifs()> method.
+
+Default: C<4> motifs
+
+=cut
+
+has motifs => (
+    is      => 'rw',
+    lazy    => 1,
+    builder => '_build_motifs',
+);
+
+sub _build_motifs ($self) {
+    my $motifs = $self->_rhythm->motifs($self->motif_num);
+    $self->motifs($motifs);
+    return $motifs;
+}
 
 =head2 verbose
 
