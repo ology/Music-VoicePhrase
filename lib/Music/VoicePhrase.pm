@@ -125,12 +125,12 @@ has intervals => (
     default => sub { [-3, -2, -1, 1, 2, 3] },
 );
 
-has _voice => (
+has voice => (
     is      => 'lazy',
-    builder => '_build__voice',
+    builder => '_build_voice',
 );
 
-sub _build__voice ($self) {
+sub _build_voice ($self) {
     my $voice = Music::VoiceGen->new(
         pitches   => $self->pitches,
         intervals => $self->intervals,
@@ -381,7 +381,7 @@ Build a fresh list of voices based on the number of motifs.
 =cut
 
 sub build_voices ($self) {
-    my @voices = map { $self->_voice->rand } $self->motifs->@*;
+    my @voices = map { $self->voice->rand } $self->motifs->@*;
     return \@voices;
 }
 
