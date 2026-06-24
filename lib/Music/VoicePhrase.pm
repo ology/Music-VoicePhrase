@@ -327,6 +327,13 @@ has onsets => (
     default => sub { [] },
 );
 
+# TESTING:
+has offsets => (
+    is      => 'rw',
+    isa     => sub { croak "$_[0] is not an array-ref" unless ref $_[0] eq 'ARRAY' },
+    default => sub { [] },
+);
+
 =head2 verbose
 
   $verbose = $mvp->verbose;
@@ -411,6 +418,6 @@ L<Music::Scales>
 
 L<Music::VoiceGen>
 
-L<https://github.com/ology/Music/blob/master/tones-together.pl>
+L<https://github.com/ology/Music/blob/master/tones-parts.pl>
 
 =cut
