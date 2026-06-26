@@ -1,6 +1,9 @@
 Revision history for Music-VoicePhrase
 
 {{$NEXT}}
+    - Improve documentation.
+    - Add a channel attribute.
+    - Improve tests.
 
 0.0107 2026-06-23 11:18:21
     - Improve documentatiion.

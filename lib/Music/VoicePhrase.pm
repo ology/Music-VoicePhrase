@@ -89,9 +89,10 @@ has octave => (
 
   $pitches = $mvp->pitches;
 
-Scale name known to the L<Music::Scales> module.
+The allowed pitches in MIDI number format.
 
-Default: 2 consecutive octaves given the B<base> note, B<scale> name, and starting B<octave>.
+Default: 2 consecutive octaves given the B<base> note, B<scale> name,
+and starting B<octave>.
 
 =cut
 
@@ -327,11 +328,20 @@ has onsets => (
     default => sub { [] },
 );
 
-# TESTING:
-has offsets => (
+=head2 channel
+
+  $channel = $mvp->channel;
+
+The MIDI channel of the part.
+
+Default: C<0>
+
+=cut
+
+has channel => (
     is      => 'rw',
-    isa     => sub { croak "$_[0] is not an array-ref" unless ref $_[0] eq 'ARRAY' },
-    default => sub { [] },
+    isa     => sub { croak "$_[0] is not an integer" unless $_[0] =~ /^\d+$/ },
+    default => sub { 0 },
 );
 
 =head2 verbose
@@ -362,9 +372,9 @@ Create a new C<Music::VoicePhrase> object.
 
 =cut
 
-sub BUILD ($self, $args) {
-    # $self->_build_motifs;
-}
+# sub BUILD ($self, $args) {
+#     $self->_build_motifs;
+# }
 
 =head2 build_motifs
 
