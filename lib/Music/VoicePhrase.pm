@@ -2,7 +2,7 @@ package Music::VoicePhrase;
 
 # ABSTRACT: Construct a measured phrase of notes
 
-our $VERSION = '0.0108';
+our $VERSION = '0.0109';
 
 use v5.36;
 use Moo;
@@ -264,6 +264,22 @@ has voices => (
     is      => 'rw',
     lazy    => 1,
     builder => 'build_voices',
+);
+
+=head2 patch
+
+  $patch = $mvp->patch;
+
+Patch / synth program integer from C<0> to C<127>.
+
+Default: C<0> (GM piano)
+
+=cut
+
+has patch => (
+    is      => 'ro',
+    isa     => sub { croak "$_[0] is not a valid patch" unless $_[0] =~ /^[0-9]$/ },
+    default => sub { 0 },
 );
 
 =head2 queue
