@@ -2,7 +2,7 @@ package Music::VoicePhrase;
 
 # ABSTRACT: Construct a measured phrase of notes
 
-our $VERSION = '0.0109';
+our $VERSION = '0.0110';
 
 use v5.36;
 use Moo;
@@ -278,7 +278,7 @@ Default: C<0> (GM piano)
 
 has patch => (
     is      => 'ro',
-    isa     => sub { croak "$_[0] is not a valid patch" unless $_[0] =~ /^[0-9]$/ },
+    isa     => sub { croak "$_[0] is not a valid patch" unless $_[0] =~ /^[0-9]+$/ },
     default => sub { 0 },
 );
 

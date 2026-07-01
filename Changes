@@ -1,6 +1,7 @@
 Revision history for Music-VoicePhrase
 
 {{$NEXT}}
+    - Oops. Fix patch isa.
 
 0.0109 2026-06-30 16:30:16
     - Add the patch attribute.
