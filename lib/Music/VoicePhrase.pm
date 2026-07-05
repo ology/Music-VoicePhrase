@@ -143,7 +143,11 @@ sub _build_voice ($self) {
 
   $size = $mvp->size;
 
-Size of a measure.
+The number of beats in a phrase. This is usually an interger like C<4>
+beats for a measure. But it can also be a float, as the
+L<Music::Duration::Partition> module takes fractional numbers. For 
+instance size C<2.5> represents C<5/8> time. Because a size of <5>
+represents C<5/4> time.
 
 Default: C<4>
 
@@ -151,7 +155,7 @@ Default: C<4>
 
 has size => (
     is      => 'ro',
-    isa     => sub { croak "$_[0] is not a valid size" unless $_[0] =~ /^\d+$/ },
+    isa     => sub { croak "$_[0] is not a valid size" unless $_[0] =~ /^[\d.]+$/ },
     default => sub { 4 },
 );
 
