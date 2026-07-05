@@ -85,6 +85,22 @@ has octave => (
     default => sub { 0 },
 );
 
+=head2 pitches_name
+
+  $pitches_name = $mvp->pitches_name;
+
+Name for the given B<pitches>, used in real-time processing.
+
+Default: C<'2 octaves'>
+
+=cut
+
+has pitches_name => (
+    is      => 'ro',
+    isa     => sub { croak "$_[0] is not a valid pitches name" unless defined $_[0] },
+    default => sub { '2 octaves' },
+);
+
 =head2 pitches
 
   $pitches = $mvp->pitches;
@@ -109,6 +125,22 @@ sub _build_pitches ($self) {
     );
     return \@pitches;
 }
+
+=head2 intervals_name
+
+  $intervals_name = $mvp->intervals_name;
+
+Name for the given B<intervals>, used in real-time processing.
+
+Default: C<'-3..-1,1..3'>
+
+=cut
+
+has intervals_name => (
+    is      => 'ro',
+    isa     => sub { croak "$_[0] is not a valid intervals name" unless defined $_[0] },
+    default => sub { '-3..-1,1..3' },
+);
 
 =head2 intervals
 
