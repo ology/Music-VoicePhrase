@@ -143,7 +143,7 @@ sub _build_voice ($self) {
 
   $size = $mvp->size;
 
-The number of beats in a phrase. This is usually an interger like C<4>
+The number of beats in a phrase. This is usually an integer like C<4>
 beats for a measure. But it can also be a float, as the
 L<Music::Duration::Partition> module takes fractional numbers. For 
 instance size C<2.5> represents C<5/8> time. Because a size of <5>
