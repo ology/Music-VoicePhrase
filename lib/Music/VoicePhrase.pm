@@ -145,7 +145,7 @@ sub _build_voice ($self) {
 
 The number of beats in a phrase. This is usually an integer like C<4>
 beats for a measure. But it can also be a float, as the
-L<Music::Duration::Partition> module takes fractional numbers. For 
+L<Music::Duration::Partition> module takes fractional numbers. For
 instance size C<2.5> represents C<5/8> time. Because a size of <5>
 represents C<5/4> time.
 
