@@ -1,6 +1,8 @@
 Revision history for Music-VoicePhrase
 
 {{$NEXT}}
+
+0.0113 2026-07-05 10:17:48
     - Make all attributes read-write.
 
 0.0112 2026-07-05 09:24:00
