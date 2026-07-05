@@ -2,7 +2,7 @@ package Music::VoicePhrase;
 
 # ABSTRACT: Construct a measured phrase of notes
 
-our $VERSION = '0.0112';
+our $VERSION = '0.0113';
 
 use v5.36;
 use Moo;
@@ -48,7 +48,7 @@ Default: C<C>
 =cut
 
 has base => (
-    is      => 'ro',
+    is      => 'rw',
     isa     => sub { croak "$_[0] is not a valid note" unless $_[0] =~ /^[A-G][#b]?$/i },
     default => sub { 'C' },
 );
@@ -64,7 +64,7 @@ Default: C<major>
 =cut
 
 has scale => (
-    is      => 'ro',
+    is      => 'rw',
     isa     => sub { croak "$_[0] is not a valid scale name" unless $_[0] =~ /^\w+$/ },
     default => sub { 'major' },
 );
@@ -80,7 +80,7 @@ Default: C<0>
 =cut
 
 has octave => (
-    is      => 'ro',
+    is      => 'rw',
     isa     => sub { croak "$_[0] is not a valid octave" unless $_[0] =~ /^[0-9]$/ },
     default => sub { 0 },
 );
@@ -96,7 +96,7 @@ Default: C<'2 octaves'>
 =cut
 
 has pitches_name => (
-    is      => 'ro',
+    is      => 'rw',
     isa     => sub { croak "$_[0] is not a valid pitches name" unless defined $_[0] },
     default => sub { '2 octaves' },
 );
@@ -113,7 +113,8 @@ and starting B<octave>.
 =cut
 
 has pitches => (
-    is      => 'lazy',
+    is      => 'rw',
+    lazy    => 1,
     isa     => sub { croak "$_[0] is not an array-ref" unless ref $_[0] eq 'ARRAY' },
     builder => '_build_pitches',
 );
@@ -137,7 +138,7 @@ Default: C<'-3..-1,1..3'>
 =cut
 
 has intervals_name => (
-    is      => 'ro',
+    is      => 'rw',
     isa     => sub { croak "$_[0] is not a valid intervals name" unless defined $_[0] },
     default => sub { '-3..-1,1..3' },
 );
@@ -153,13 +154,14 @@ Default: [-3, -2, -1, 1, 2, 3]
 =cut
 
 has intervals => (
-    is      => 'ro',
+    is      => 'rw',
     isa     => sub { croak "$_[0] is not an array-ref" unless ref $_[0] eq 'ARRAY' },
     default => sub { [-3, -2, -1, 1, 2, 3] },
 );
 
 has voice => (
-    is      => 'lazy',
+    is      => 'rw',
+    lazy    => 1,
     builder => '_build_voice',
 );
 
@@ -186,7 +188,7 @@ Default: C<4>
 =cut
 
 has size => (
-    is      => 'ro',
+    is      => 'rw',
     isa     => sub { croak "$_[0] is not a valid size" unless $_[0] =~ /^[\d.]+$/ },
     default => sub { 4 },
 );
@@ -203,7 +205,7 @@ Default: ['dhn', 'hn', 'qn']
 =cut
 
 has pool => (
-    is      => 'ro',
+    is      => 'rw',
     isa     => sub { croak "$_[0] is not an array-ref" unless ref $_[0] eq 'ARRAY' },
     default => sub { [qw(dhn hn qn)] },
 );
@@ -219,7 +221,7 @@ Default: [ 1, 2, 2 ]
 =cut
 
 has weights => (
-    is      => 'ro',
+    is      => 'rw',
     isa     => sub { croak "$_[0] is not an array-ref" unless ref $_[0] eq 'ARRAY' },
     default => sub { [1, 2, 2] },
 );
@@ -235,13 +237,14 @@ Default: [ 0, 0, 0 ]
 =cut
 
 has groups => (
-    is      => 'ro',
+    is      => 'rw',
     isa     => sub { croak "$_[0] is not an array-ref" unless ref $_[0] eq 'ARRAY' },
     default => sub { [0, 0, 0] },
 );
 
 has _rhythm => (
-    is      => 'lazy',
+    is      => 'rw',
+    lazy    => 1,
     builder => '_build__rhythm',
 );
 
@@ -313,7 +316,7 @@ Default: C<0> (GM piano)
 =cut
 
 has patch => (
-    is      => 'ro',
+    is      => 'rw',
     isa     => sub { croak "$_[0] is not a valid patch" unless $_[0] =~ /^[0-9]+$/ },
     default => sub { 0 },
 );
@@ -407,7 +410,7 @@ Default: C<0>
 =cut
 
 has verbose => (
-    is      => 'ro',
+    is      => 'rw',
     isa     => sub { croak "$_[0] is not a boolean" unless $_[0] =~ /^[01]$/ },
     default => sub { 0 },
 );

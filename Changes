@@ -1,6 +1,7 @@
 Revision history for Music-VoicePhrase
 
 {{$NEXT}}
+    - Make all attributes read-write.
 
 0.0112 2026-07-05 09:24:00
     - Add the pitches_name and intervals_name attributes.
