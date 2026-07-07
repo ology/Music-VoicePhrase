@@ -2,7 +2,7 @@ package Music::VoicePhrase;
 
 # ABSTRACT: Construct a measured phrase of notes
 
-our $VERSION = '0.0113';
+our $VERSION = '0.0114';
 
 use v5.36;
 use Moo;

@@ -9,7 +9,7 @@ use List::Util qw(any);
 use_ok 'Music::VoicePhrase';
 
 subtest defaults => sub {
-    my $obj = new_ok 'Music::VoicePhrase';
+    my $obj = new_ok 'Music::VoicePhrase'; #=> [verbose => 1];
     is $obj->base, 'C', 'base';
     is $obj->scale, 'major', 'scale';
     is $obj->octave, 0, 'octave';
