@@ -2,7 +2,7 @@ package Music::VoicePhrase;
 
 # ABSTRACT: Construct a measured phrase of notes
 
-our $VERSION = '0.0114';
+our $VERSION = '0.0115';
 
 use v5.36;
 use Moo;
@@ -164,6 +164,7 @@ has voice => (
     is      => 'rw',
     lazy    => 1,
     builder => '_build_voice',
+    clearer => 'clear_voice',
 );
 
 sub _build_voice ($self) {
@@ -291,6 +292,7 @@ has motifs => (
     is      => 'rw',
     lazy    => 1,
     builder => 'build_motifs',
+    clearer => 'clear_motifs',
 );
 
 =head2 voices

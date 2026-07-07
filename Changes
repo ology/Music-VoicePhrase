@@ -1,6 +1,7 @@
 Revision history for Music-VoicePhrase
 
 {{$NEXT}}
+    - Add clearer methods to the voice and motifs attributes.
 
 0.0114 2026-07-07 11:13:01
     - Add missing verbosity.
