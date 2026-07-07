@@ -1,6 +1,7 @@
 Revision history for Music-VoicePhrase
 
 {{$NEXT}}
+    - Add verbose statements.
 
 0.0113 2026-07-05 10:17:48
     - Make all attributes read-write.

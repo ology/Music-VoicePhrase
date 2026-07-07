@@ -124,6 +124,7 @@ sub _build_pitches ($self) {
         get_scale_MIDI($self->base, $self->octave, $self->scale),
         get_scale_MIDI($self->base, $self->octave + 1, $self->scale),
     );
+    say 'Built pitches: ', join ' ', @pitches if $self->verbose;
     return \@pitches;
 }
 
@@ -170,6 +171,7 @@ sub _build_voice ($self) {
         pitches   => $self->pitches,
         intervals => $self->intervals,
     );
+    say "Built voice: $voice" if $self->verbose;
     return $voice;
 }
 
@@ -255,6 +257,8 @@ sub _build__rhythm ($self) {
       weights => $self->weights,
       groups  => $self->groups,
   );
+  say "Built rhythm generator: $mdp" if $self->verbose;
+  return $mdp;
 }
 
 =head2 motif_num
@@ -441,6 +445,7 @@ Build a fresh list of motifs based on the .
 
 sub build_motifs ($self) {
     my @motifs = $self->_rhythm->motifs($self->motif_num);
+    say "Built motifs: @motifs" if $self->verbose;
     return \@motifs;
 }
 
@@ -454,6 +459,7 @@ Build a fresh list of voices based on the number of motifs.
 
 sub build_voices ($self) {
     my @voices = map { $self->voice->rand } $self->motifs->@*;
+    say "Built voices: @voices" if $self->verbose;
     return \@voices;
 }
 
