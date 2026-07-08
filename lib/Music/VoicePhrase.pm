@@ -2,7 +2,7 @@ package Music::VoicePhrase;
 
 # ABSTRACT: Construct a measured phrase of notes
 
-our $VERSION = '0.0115';
+our $VERSION = '0.0116';
 
 use v5.36;
 use Moo;
@@ -325,6 +325,26 @@ has patch => (
     is      => 'rw',
     isa     => sub { croak "$_[0] is not a valid patch" unless $_[0] =~ /^[0-9]+$/ },
     default => sub { 0 },
+);
+
+=head2 gate
+
+  $gate = $mvp->gate;
+
+A possibly fractional amount representing how long a note-length is
+between C<0> and C<2>. A C<0> value means that the note is not played.
+A C<2> means the note is to be held twice as long.
+
+This is used in real-time processing.
+
+Default: C<1> (unity)
+
+=cut
+
+has gate => (
+    is      => 'rw',
+    isa     => sub { croak "$_[0] is not a valid gate" unless $_[0] =~ /^[0-9.-]+$/ && $_[0] >= 0 && $_[0] <= 2 },
+    default => sub { 1 },
 );
 
 =head2 queue
