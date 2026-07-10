@@ -1,8 +1,8 @@
 package Music::VoicePhrase;
 
-# ABSTRACT: Construct a measured phrase of notes
+# ABSTRACT: Construct measured phrases of notes
 
-our $VERSION = '0.0116';
+our $VERSION = '0.0117';
 
 use v5.36;
 use Moo;
@@ -31,7 +31,7 @@ use namespace::clean;
 A C<Music::VoicePhrase> constructs a measured phrase of voices with
 both pitch and rhythmic value.
 
-This module is also equipped with a few handy attributes to make
+This module is also equipped with handy attributes to make
 real-time processing work. See the linked script in the
 L</"SEE ALSO"> section.
 
@@ -315,7 +315,8 @@ has voices => (
 
   $patch = $mvp->patch;
 
-Patch / synth program integer from C<0> to C<127>.
+Patch / synth program integer from C<0> to C<127> used in real-time
+processing.
 
 Default: C<0> (GM piano)
 
@@ -383,7 +384,8 @@ has index => (
   $note = $mvp->note;
   $mvp->note($n);
 
-Computed attribute for the currently selected note that is used in real-time processing.
+Computed attribute for the currently selected note that is used in
+real-time processing.
 
 Default: C<{}>
 
@@ -512,5 +514,7 @@ L<Music::Scales>
 L<Music::VoiceGen>
 
 L<https://github.com/ology/Music/blob/master/tones-variation.pl>
+
+L<https://github.com/ology/Phrase-Generator>
 
 =cut

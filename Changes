@@ -1,6 +1,7 @@
 Revision history for Music-VoicePhrase
 
 {{$NEXT}}
+    - Improve documentation.
 
 0.0116 2026-07-07 19:04:26
     - Add the gate attribute for use in rt-midi.
