@@ -1,6 +1,7 @@
 Revision history for Music-VoicePhrase
 
 {{$NEXT}}
+    Add a volume attribute. Not sure how come I missed that.
 
 0.0118 2026-07-11 19:18:31
     - How about we name a part? Wouldn't that be clever?

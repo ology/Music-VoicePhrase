@@ -364,6 +364,23 @@ has gate => (
     default => sub { 1 },
 );
 
+=head2 volume
+
+  $volume = $mvp->volume;
+  $mvp->volume($n);
+
+Computed attribute for the volume that is used in real-time processing.
+
+Default: C<100>
+
+=cut
+
+has volume => (
+    is      => 'rw',
+    isa     => sub { croak "$_[0] is not an integer" unless $_[0] =~ /^\d+$/ },
+    default => sub { 100 },
+);
+
 =head2 queue
 
   $queue = $mvp->queue;
