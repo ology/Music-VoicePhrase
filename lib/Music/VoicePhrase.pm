@@ -311,6 +311,22 @@ has voices => (
     builder => 'build_voices',
 );
 
+=head2 name
+
+  $name = $mvp->name;
+
+Name for the given part, used in real-time processing.
+
+Default: C<'part'>
+
+=cut
+
+has name => (
+    is      => 'rw',
+    isa     => sub { croak "$_[0] is not a valid part name" unless defined $_[0] },
+    default => sub { 'part' },
+);
+
 =head2 patch
 
   $patch = $mvp->patch;
