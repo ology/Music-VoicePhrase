@@ -2,7 +2,7 @@ package Music::VoicePhrase;
 
 # ABSTRACT: Construct measured phrases of notes
 
-our $VERSION = '0.0122';
+our $VERSION = '0.0123';
 
 use v5.36;
 use Moo;
@@ -304,6 +304,26 @@ has metadata => (
     default => sub { +{} },
 );
 
+=head2 verbose
+
+  $verbose = $mvp->verbose;
+
+Show progress.
+
+Default: C<0>
+
+=cut
+
+has verbose => (
+    is      => 'rw',
+    isa     => sub { croak "$_[0] is not a boolean" unless $_[0] =~ /^[01]$/ },
+    default => sub { 0 },
+);
+
+=head1 Extra
+
+These attributes are used in real-time processing, etc.
+
 =head2 name
 
   $name = $mvp->name;
@@ -471,22 +491,6 @@ Default: C<0>
 has rest_prob => (
     is      => 'rw',
     isa     => sub { croak "$_[0] is not a valid probability" unless $_[0] =~ /^[\d.]+$/ },
-    default => sub { 0 },
-);
-
-=head2 verbose
-
-  $verbose = $mvp->verbose;
-
-Show progress.
-
-Default: C<0>
-
-=cut
-
-has verbose => (
-    is      => 'rw',
-    isa     => sub { croak "$_[0] is not a boolean" unless $_[0] =~ /^[01]$/ },
     default => sub { 0 },
 );
 
