@@ -2,7 +2,7 @@ package Music::VoicePhrase;
 
 # ABSTRACT: Construct measured phrases of notes
 
-our $VERSION = '0.0123';
+our $VERSION = '0.0124';
 
 use v5.36;
 use Moo;
@@ -328,7 +328,7 @@ These attributes are used in real-time processing, etc.
 
   $name = $mvp->name;
 
-Name for the given part, used in real-time processing.
+Name for the given part.
 
 Default: C<'part'>
 
@@ -344,8 +344,7 @@ has name => (
 
   $patch = $mvp->patch;
 
-Patch / synth program integer from C<0> to C<127> used in real-time
-processing.
+Patch / synth program integer from C<0> to C<127>.
 
 Default: C<0> (GM piano)
 
@@ -365,8 +364,6 @@ A possibly fractional amount representing how long a note-length is
 between C<0> and C<2>. A C<0> value means that the note is not played.
 A C<2> means the note is to be held twice as long.
 
-This is used in real-time processing.
-
 Default: C<1> (unity)
 
 =cut
@@ -382,7 +379,7 @@ has gate => (
   $volume = $mvp->volume;
   $mvp->volume($n);
 
-Computed attribute for the volume that is used in real-time processing.
+Computed attribute for the volume.
 
 Default: C<100>
 
@@ -398,7 +395,7 @@ has volume => (
 
   $queue = $mvp->queue;
 
-Computed attribute for the priority queue used in real-time processing.
+Computed attribute for the priority queue.
 
 =cut
 
@@ -413,7 +410,7 @@ has queue => (
   $index = $mvp->index;
   $mvp->index($n);
 
-Computed attribute for the queue index that is used in real-time processing.
+Computed attribute for the queue index.
 
 Default: C<0>
 
@@ -430,8 +427,7 @@ has index => (
   $note = $mvp->note;
   $mvp->note($n);
 
-Computed attribute for the currently selected note that is used in
-real-time processing.
+Computed attribute for the currently selected note.
 
 Default: C<{}>
 
@@ -447,7 +443,7 @@ has note => (
 
   $onsets = $mvp->onsets;
 
-Computed attribute for the note onsets used in real-time processing.
+Computed attribute for the note onsets.
 
 =cut
 
@@ -478,8 +474,7 @@ has channel => (
   $rest_prob = $mvp->rest_prob;
   $mvp->rest_prob($n);
 
-Computed attribute for the rest probability that is used in real-time
-processing.
+Computed attribute for the rest probability.
 
 A value of C<0> means there is no resting. A 20% chance of a rest
 would be C<0.2>. A value of C<1> means "only rest." Ha!
