@@ -2,7 +2,7 @@ package Music::VoicePhrase;
 
 # ABSTRACT: Construct measured phrases of notes
 
-our $VERSION = '0.0119';
+our $VERSION = '0.0120';
 
 use v5.36;
 use Moo;
@@ -457,6 +457,27 @@ Default: C<0>
 has channel => (
     is      => 'rw',
     isa     => sub { croak "$_[0] is not an integer" unless $_[0] =~ /^\d+$/ },
+    default => sub { 0 },
+);
+
+=head2 rest_prob
+
+  $rest_prob = $mvp->rest_prob;
+  $mvp->rest_prob($n);
+
+Computed attribute for the rest probability that is used in real-time
+processing.
+
+A value of C<0> means there is no resting. A 20% chance of a rest
+would be C<0.2>. A value of C<1> means "only rest." Ha!
+
+Default: C<0>
+
+=cut
+
+has rest_prob => (
+    is      => 'rw',
+    isa     => sub { croak "$_[0] is not a valid probability" unless $_[0] =~ /^[\d.]+$/ },
     default => sub { 0 },
 );
 
