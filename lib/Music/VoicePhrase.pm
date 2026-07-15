@@ -2,7 +2,7 @@ package Music::VoicePhrase;
 
 # ABSTRACT: Construct measured phrases of notes
 
-our $VERSION = '0.0121';
+our $VERSION = '0.0122';
 
 use v5.36;
 use Moo;
@@ -20,7 +20,7 @@ use namespace::clean;
   my $mvp = Music::VoicePhrase->new;
 
   # or also with external processing metadata:
-  my %metadata = (key => 'value!');
+  my %metadata = (key => 'value!', color => 'hot-pink');
   $mvp = Music::VoicePhrase->new(metadata => \%metadata);
   $mvp->metadata(\%metadata);
   my $value = $mvp->metadata->{key}; # ghetto access - ugh
@@ -145,6 +145,7 @@ sub _build_voice ($self) {
     my $voice = Music::VoiceGen->new(
         pitches   => $self->pitches,
         intervals => $self->intervals,
+        verbose   => $self->verbose,
     );
     say "Built voice: $voice" if $self->verbose;
     return $voice;
@@ -231,6 +232,7 @@ sub _build__rhythm ($self) {
       pool    => $self->pool,
       weights => $self->weights,
       groups  => $self->groups,
+      verbose => $self->verbose,
   );
   say "Built rhythm generator: $mdp" if $self->verbose;
   return $mdp;

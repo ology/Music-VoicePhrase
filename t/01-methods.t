@@ -67,4 +67,15 @@ subtest size => sub {
     is $obj->size, 2.5, 'size';
 };
 
+subtest metadata => sub {
+    my %metadata = (key => 'value!', color => 'hot-pink');
+    my $obj = new_ok 'Music::VoicePhrase' => [
+        metadata => \%metadata,
+    ];
+    is_deeply $obj->metadata, \%metadata, 'metadata';
+    is $obj->metadata->{key}, 'value!', 'metadata';
+    $obj->metadata->{key} = 'hello?';
+    is $obj->metadata->{key}, 'hello?', 'metadata';
+};
+
 done_testing();

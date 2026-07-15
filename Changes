@@ -1,6 +1,9 @@
 Revision history for Music-VoicePhrase
 
 {{$NEXT}}
+    - Pass verbose state through to voice and motif objects.
+    - Add metadata tests.
+    - Improve documentation.
 
 0.0121 2026-07-15 15:17:48
     - Add a metadata attribute to handle extra bits.
@@ -48,7 +51,7 @@ Revision history for Music-VoicePhrase
     - Improve tests.
 
 0.0107 2026-06-23 11:18:21
-    - Improve documentatiion.
+    - Improve documentation.
     - Make voice public.
 _
 0.0106 2026-06-22 15:21:03
