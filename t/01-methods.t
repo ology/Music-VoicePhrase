@@ -29,6 +29,7 @@ subtest defaults => sub {
     is $obj->motif_num, 4, 'motif_num';
     is scalar $obj->motifs->@*, 4, 'motifs';
     is scalar $obj->voices->@*, 4, 'voices';
+    is_deeply $obj->metadata, {}, 'metadata';
     is $obj->verbose, 0, 'verbose';
 };
 
@@ -43,18 +44,17 @@ subtest pitches => sub {
         $got = any { $voice == $_ } $obj->pitches->@*;
     }
     ok $got, 'pitches';
-    is $obj->pitches_name, 'abc', 'pitches_name';
 };
 
-subtest intervals => sub {
-    my $obj = new_ok 'Music::VoicePhrase' => [
-        intervals      => [(-4 .. -1), (1 .. 4)],
-        intervals_name => 'xyz',
-        motif_num      => 20,
-    ];
-    # TODO not sure how to test intervals, yet. :\
-    is $obj->intervals_name, 'xyz', 'intervals_name';
-};
+# TODO not sure how to test intervals, yet. :\
+# subtest intervals => sub {
+#     my $obj = new_ok 'Music::VoicePhrase' => [
+#         intervals      => [(-4 .. -1), (1 .. 4)],
+#         intervals_name => 'xyz',
+#         motif_num      => 20,
+#     ];
+#     is $obj->intervals_name, 'xyz', 'intervals_name';
+# };
 
 subtest size => sub {
     my $obj = new_ok 'Music::VoicePhrase' => [

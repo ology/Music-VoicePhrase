@@ -2,7 +2,7 @@ package Music::VoicePhrase;
 
 # ABSTRACT: Construct measured phrases of notes
 
-our $VERSION = '0.0120';
+our $VERSION = '0.0121';
 
 use v5.36;
 use Moo;
@@ -19,10 +19,16 @@ use namespace::clean;
 
   my $mvp = Music::VoicePhrase->new;
 
+  # or also with external processing metadata:
+  my %metadata = (key => 'value!');
+  $mvp = Music::VoicePhrase->new(metadata => \%metadata);
+  $mvp->metadata(\%metadata);
+  my $value = $mvp->metadata->{key}; # ghetto access - ugh
+
   my $motifs = $mvp->motifs; # using defaults
   my $voices = $mvp->voices;
 
-  $mvp->motif_num(6); # get fresh
+  # get fresh:
   $motifs = $mvp->build_motifs;
   $voices = $mvp->build_voices;
 
@@ -85,22 +91,6 @@ has octave => (
     default => sub { 0 },
 );
 
-=head2 pitches_name
-
-  $pitches_name = $mvp->pitches_name;
-
-Name for the given B<pitches>, used in real-time processing.
-
-Default: C<'2 octaves'>
-
-=cut
-
-has pitches_name => (
-    is      => 'rw',
-    isa     => sub { croak "$_[0] is not a valid pitches name" unless defined $_[0] },
-    default => sub { '2 octaves' },
-);
-
 =head2 pitches
 
   $pitches = $mvp->pitches;
@@ -127,22 +117,6 @@ sub _build_pitches ($self) {
     say 'Built pitches: ', join ' ', @pitches if $self->verbose;
     return \@pitches;
 }
-
-=head2 intervals_name
-
-  $intervals_name = $mvp->intervals_name;
-
-Name for the given B<intervals>, used in real-time processing.
-
-Default: C<'-3..-1,1..3'>
-
-=cut
-
-has intervals_name => (
-    is      => 'rw',
-    isa     => sub { croak "$_[0] is not a valid intervals name" unless defined $_[0] },
-    default => sub { '-3..-1,1..3' },
-);
 
 =head2 intervals
 
@@ -309,6 +283,23 @@ has voices => (
     is      => 'rw',
     lazy    => 1,
     builder => 'build_voices',
+);
+
+=head2 metadata
+
+  $metadata = $mvp->metadata;
+  $mvp->metadata(\%data);
+
+Extra named things!
+
+Default: C<{}> (nothing extra)
+
+=cut
+
+has metadata => (
+    is      => 'rw',
+    isa     => sub { croak "$_[0] is not a hash-ref" unless ref $_[0] eq 'HASH' },
+    default => sub { +{} },
 );
 
 =head2 name
