@@ -13,11 +13,6 @@ subtest defaults => sub {
     is $obj->base, 'C', 'base';
     is $obj->scale, 'major', 'scale';
     is $obj->octave, 0, 'octave';
-    is $obj->name, 'part', 'name';
-    is $obj->patch, 0, 'patch';
-    is $obj->gate, 1, 'gate';
-    is $obj->volume, 100, 'volume';
-    is $obj->rest_prob, 0, 'rest_prob';
     is scalar $obj->pitches->@*, 14, 'pitches';
     is_deeply $obj->intervals, [-3,-2,-1,1,2,3], 'intervals';
     isa_ok $obj->voice, 'Music::VoiceGen';
@@ -43,18 +38,11 @@ subtest pitches => sub {
         $got = any { $voice == $_ } $obj->pitches->@*;
     }
     ok $got, 'pitches';
-    is $obj->pitches_name, 'abc', 'pitches_name';
 };
 
-subtest intervals => sub {
-    my $obj = new_ok 'Music::VoicePhrase' => [
-        intervals      => [(-4 .. -1), (1 .. 4)],
-        intervals_name => 'xyz',
-        motif_num      => 20,
-    ];
-    # TODO not sure how to test intervals, yet. :\
-    is $obj->intervals_name, 'xyz', 'intervals_name';
-};
+# TODO not sure how to test intervals, yet. :\
+# subtest intervals => sub {
+# };
 
 subtest size => sub {
     my $obj = new_ok 'Music::VoicePhrase' => [

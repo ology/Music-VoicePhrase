@@ -1,6 +1,7 @@
 Revision history for Music-VoicePhrase
 
 {{$NEXT}}
+    - Use a single metadata hash, not a million attributes. Sheesh!
 
 0.0120 2026-07-14 17:01:50
     - Add a rest probability attribute. Maybe this should all be metadata...

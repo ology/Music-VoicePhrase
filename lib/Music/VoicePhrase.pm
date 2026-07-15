@@ -17,14 +17,20 @@ use namespace::clean;
 
   use Music::VoicePhrase ();
 
-  my $mvp = Music::VoicePhrase->new;
+  my $mvp = Music::VoicePhrase->new; # using the defaults
+
+  # or also with external processing metadata:
+  my %metadata = (key => 'value!');
+  $mvp = Music::VoicePhrase->new(metadata => \%metadata);
+  $mvp->metadata(\%metadata);
+  my $value = $mvp->metadata->{key}; # ghetto access - ugh
 
   my $motifs = $mvp->motifs; # using defaults
   my $voices = $mvp->voices;
 
-  $mvp->motif_num(6); # get fresh
-  $motifs = $mvp->build_motifs;
-  $voices = $mvp->build_voices;
+  $mvp->motif_num(6);
+  $motifs = $mvp->build_motifs; # get fresh
+  $voices = $mvp->build_voices; # get fresh
 
 =head1 DESCRIPTION
 
@@ -85,22 +91,6 @@ has octave => (
     default => sub { 0 },
 );
 
-=head2 pitches_name
-
-  $pitches_name = $mvp->pitches_name;
-
-Name for the given B<pitches>, used in real-time processing.
-
-Default: C<'2 octaves'>
-
-=cut
-
-has pitches_name => (
-    is      => 'rw',
-    isa     => sub { croak "$_[0] is not a valid pitches name" unless defined $_[0] },
-    default => sub { '2 octaves' },
-);
-
 =head2 pitches
 
   $pitches = $mvp->pitches;
@@ -127,22 +117,6 @@ sub _build_pitches ($self) {
     say 'Built pitches: ', join ' ', @pitches if $self->verbose;
     return \@pitches;
 }
-
-=head2 intervals_name
-
-  $intervals_name = $mvp->intervals_name;
-
-Name for the given B<intervals>, used in real-time processing.
-
-Default: C<'-3..-1,1..3'>
-
-=cut
-
-has intervals_name => (
-    is      => 'rw',
-    isa     => sub { croak "$_[0] is not a valid intervals name" unless defined $_[0] },
-    default => sub { '-3..-1,1..3' },
-);
 
 =head2 intervals
 
@@ -311,90 +285,6 @@ has voices => (
     builder => 'build_voices',
 );
 
-=head2 name
-
-  $name = $mvp->name;
-
-Name for the given part, used in real-time processing.
-
-Default: C<'part'>
-
-=cut
-
-has name => (
-    is      => 'rw',
-    isa     => sub { croak "$_[0] is not a valid part name" unless defined $_[0] },
-    default => sub { 'part' },
-);
-
-=head2 patch
-
-  $patch = $mvp->patch;
-
-Patch / synth program integer from C<0> to C<127> used in real-time
-processing.
-
-Default: C<0> (GM piano)
-
-=cut
-
-has patch => (
-    is      => 'rw',
-    isa     => sub { croak "$_[0] is not a valid patch" unless $_[0] =~ /^[0-9]+$/ },
-    default => sub { 0 },
-);
-
-=head2 gate
-
-  $gate = $mvp->gate;
-
-A possibly fractional amount representing how long a note-length is
-between C<0> and C<2>. A C<0> value means that the note is not played.
-A C<2> means the note is to be held twice as long.
-
-This is used in real-time processing.
-
-Default: C<1> (unity)
-
-=cut
-
-has gate => (
-    is      => 'rw',
-    isa     => sub { croak "$_[0] is not a valid gate" unless $_[0] =~ /^[0-9.-]+$/ && $_[0] >= 0 && $_[0] <= 2 },
-    default => sub { 1 },
-);
-
-=head2 volume
-
-  $volume = $mvp->volume;
-  $mvp->volume($n);
-
-Computed attribute for the volume that is used in real-time processing.
-
-Default: C<100>
-
-=cut
-
-has volume => (
-    is      => 'rw',
-    isa     => sub { croak "$_[0] is not an integer" unless $_[0] =~ /^\d+$/ },
-    default => sub { 100 },
-);
-
-=head2 queue
-
-  $queue = $mvp->queue;
-
-Computed attribute for the priority queue used in real-time processing.
-
-=cut
-
-has queue => (
-    is      => 'rw',
-    isa     => sub { croak "$_[0] is not an array-ref" unless ref $_[0] eq 'ARRAY' },
-    default => sub { [] },
-);
-
 =head2 index
 
   $index = $mvp->index;
@@ -412,73 +302,21 @@ has index => (
     default => sub { 0 },
 );
 
-=head2 note
+=head2 metadata
 
-  $note = $mvp->note;
-  $mvp->note($n);
+  $metadata = $mvp->metadata;
+  $mvp->metadata->{$key};
 
-Computed attribute for the currently selected note that is used in
-real-time processing.
+Metadata used in e.g. real-time processing.
 
-Default: C<{}>
-
-=cut
-
-has note => (
-    is      => 'rw',
-    isa     => sub { croak "$_[0] is not a valid note" unless ref $_[0] eq 'HASH' },
-    default => sub { +{} },
-);
-
-=head2 onsets
-
-  $onsets = $mvp->onsets;
-
-Computed attribute for the note onsets used in real-time processing.
+Default: C<{}> (an empty hash-ref)
 
 =cut
 
-has onsets => (
+has metadata => (
     is      => 'rw',
-    isa     => sub { croak "$_[0] is not an array-ref" unless ref $_[0] eq 'ARRAY' },
-    default => sub { [] },
-);
-
-=head2 channel
-
-  $channel = $mvp->channel;
-
-The MIDI channel of the part.
-
-Default: C<0>
-
-=cut
-
-has channel => (
-    is      => 'rw',
-    isa     => sub { croak "$_[0] is not an integer" unless $_[0] =~ /^\d+$/ },
-    default => sub { 0 },
-);
-
-=head2 rest_prob
-
-  $rest_prob = $mvp->rest_prob;
-  $mvp->rest_prob($n);
-
-Computed attribute for the rest probability that is used in real-time
-processing.
-
-A value of C<0> means there is no resting. A 20% chance of a rest
-would be C<0.2>. A value of C<1> means "only rest." Ha!
-
-Default: C<0>
-
-=cut
-
-has rest_prob => (
-    is      => 'rw',
-    isa     => sub { croak "$_[0] is not a valid probability" unless $_[0] =~ /^[\d.]+$/ },
-    default => sub { 0 },
+    isa     => sub { croak "$_[0] isn't a metadata hash reference" unless ref $_[0] eq 'HASH' },
+    default => sub { {} },
 );
 
 =head2 verbose
@@ -566,9 +404,5 @@ L<Music::Duration::Partition>
 L<Music::Scales>
 
 L<Music::VoiceGen>
-
-L<https://github.com/ology/Music/blob/master/tones-variation.pl>
-
-L<https://github.com/ology/Phrase-Generator>
 
 =cut
