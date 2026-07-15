@@ -1,6 +1,8 @@
 Revision history for Music-VoicePhrase
 
 {{$NEXT}}
+
+0.0121 2026-07-15 15:17:48
     - Add a metadata attribute to handle extra bits.
     - Lose the annoying *_name attributes.
 
