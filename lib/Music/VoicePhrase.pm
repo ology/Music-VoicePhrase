@@ -561,8 +561,6 @@ L<Music::Scales>
 
 L<Music::VoiceGen>
 
-L<https://github.com/ology/Music/blob/master/tones-variation.pl>
-
 L<https://github.com/ology/Phrase-Generator>
 
 =cut
